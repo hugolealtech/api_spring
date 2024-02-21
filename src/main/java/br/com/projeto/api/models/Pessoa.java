@@ -19,14 +19,13 @@ public class Pessoa {
     
     private int codigo;
     private String nome;
+    private String sobrenome;
     private int idade;
     private String cpf;
     private LocalDate dataNascimento;
     private String numTelefone;
    
     //-------------------------------------//
-  
-    
     //Get-Set codigo
 
     public int getCodigo() {
@@ -35,6 +34,7 @@ public class Pessoa {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
+    //-------------------------------------//
     //Get-Set  nome
     public String getNome() {
         return nome;
@@ -42,7 +42,17 @@ public class Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    //-------------------------------------//
+    //Get-Set sobrenome
+    
+    public String getSobrenome() {
+        return sobrenome;
+    }
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
 
+    //-------------------------------------//
     //Get-Set idade
 
     public int getIdade() {
@@ -51,7 +61,7 @@ public class Pessoa {
     public void setIdade(int idade) {
         this.idade = idade;
     }
-
+ //-------------------------------------//
     //Get-Set CFP
 
     public String getCpf() {
@@ -61,7 +71,7 @@ public class Pessoa {
         this.cpf = cpf;
     
     } 
-
+    //-------------------------------------//
     //Get-Set Data de Nascimento
 
     public LocalDate getDataNascimento() {
@@ -70,8 +80,7 @@ public class Pessoa {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-
-
+    //-------------------------------------//
     //Get-Set Numero de Telefone
     
      public String getNumTelefone() {

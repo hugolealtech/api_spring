@@ -1,23 +1,74 @@
 package br.com.projeto.api.controller;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.projeto.api.models.Pessoa;
 import br.com.projeto.api.repositorio.Repositorio;
+import io.micrometer.common.lang.NonNull;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
 
 @RestController
 public class Controller {
 
-    private final Repositorio repositorio;
-
-    @Autowired
-    public Controller(Repositorio repositorio) {
-        this.repositorio = repositorio;
+   @Autowired
+   private Repositorio injetaDependencia;
+    
+   @PostMapping ("/api") 
+   public Pessoa cadastrar(@RequestBody Pessoa obj){
+        return injetaDependencia.save(obj);
     }
+
+    @GetMapping ("/api")
+    public List<Pessoa> Selecionar (){
+       return injetaDependencia.findAll();
+    }
+
+    @GetMapping("/api/{codigo}")
+    public Pessoa selecionarPeloCodigo (@PathVariable int codigo) {//SELECT * FROM PESSOA WHERE CODIGO = 1 POR EXEMPLO
+        return injetaDependencia.findByCodigo(codigo);
+    }
+    @PutMapping("/api")
+    public Pessoa editar(@RequestBody Pessoa obj){
+    
+        return injetaDependencia.save(obj);
+    }
+
+    @DeleteMapping ("/api/{codigo}")
+    public void removerDado (@PathVariable int codigo){
+        Pessoa obj = selecionarPeloCodigo (codigo);
+
+        injetaDependencia.delete(obj);
+    }
+
+    @GetMapping("/api/contador")
+    public long contador (){
+        return injetaDependencia.count();
+    }
+
+    @GetMapping("/api/ordenarNomes")
+    public List<Pessoa> ordenarNome(){
+        return injetaDependencia.findByOrderByNomeDesc();
+    }
+
+     @GetMapping("/api/ordenaNomes2")
+    public List<Pessoa> ordenaNomes2(){
+        return injetaDependencia.findByNomeOrderByIdadeDesc("Hugo");
+
+    }
+    
+    
+
+
+    //-----------------Teste API------------//
 
     @GetMapping("")
     public String mensagem() {
