@@ -1,29 +1,40 @@
-
-//Pacote
 package br.com.projeto.api.repositorio;
 
-
-//import org.hibernate.mapping.List;
-
-
-//Importar CrudRepository e a anotation @Repository
-
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-//Importar o modelo
 import br.com.projeto.api.models.Pessoa;
 
 @Repository
-public interface Repositorio  extends CrudRepository < Pessoa, Integer> {  //primeiro modelo Pessoa e o tipo de dado da chave primaria que tem que ser uma classe, ou integer
+public interface Repositorio extends CrudRepository<Pessoa, Integer> {
 
-   @SuppressWarnings("null")
-    java.util.List<Pessoa>findAll();
+    @SuppressWarnings("null")
+   java.util.List<Pessoa> findAll();
+
     Pessoa findByCodigo(int codigo);
-    Pessoa findByNome (String nome);
+
+    Pessoa findByNome(String nome);
+
     java.util.List<Pessoa> findByOrderByNomeDesc();
+
     java.util.List<Pessoa> findByNomeOrderByIdadeDesc(String idade);
-   // int coucountByCodigo (int codigo);
+
+    java.util.List<Pessoa> findByNomeContaining(String termo);
+
+    java.util.List<Pessoa> findByNomeStartsWith(String termo);
+
+    java.util.List<Pessoa> findByNomeEndsWith(String termo);
+
+    @Query(value = "SELECT SUM(idade) FROM pessoa", nativeQuery = true)
+    int somaIdades();
+
+    @Query(value = "SELECT * FROM pessoas WHERE idade >= :idade", nativeQuery = true)
+java.util.List<Pessoa> idadeMaiorIgual(@Param("idade") int idade);
 
 
+    /*@Query(value = "SELECT * FROM pessoas WHERE idade >= :idade", nativeQuery = true)
+java.util.List<Pessoa> idadeMaiorIgual(@Param("idade") int idade); */
+
+    
 }

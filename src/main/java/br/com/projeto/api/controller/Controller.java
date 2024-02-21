@@ -1,6 +1,8 @@
 package br.com.projeto.api.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.projeto.api.models.Pessoa;
 import br.com.projeto.api.repositorio.Repositorio;
@@ -64,6 +66,42 @@ public class Controller {
         return injetaDependencia.findByNomeOrderByIdadeDesc("Hugo");
 
     }
+    
+    @GetMapping("/api/nomeContem")
+    public List <Pessoa>  nomeContem() {
+        return injetaDependencia.findByNomeContaining("hugo");//funciona como LIKE no mysql
+    }
+
+    @GetMapping("/api/iniciaCom")
+    public List <Pessoa> iniciaCom() {
+        return injetaDependencia.findByNomeStartsWith("Luz");
+    }
+
+    @GetMapping("/api/terminaCom")
+    public List <Pessoa> terminaCom() {
+        return injetaDependencia.findByNomeEndsWith("Oliveira");
+    }
+
+    @GetMapping("/api/somaIdades")
+    public int somaIdades() {
+        return injetaDependencia.somaIdades();
+    }
+
+    @GetMapping("/api/idadeMaiorIgual")
+    public List <Pessoa> idadeMaiorIgual() {
+        return injetaDependencia.idadeMaiorIgual(18);
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity <?> status () {
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    
+
+    
+    
+    
+    
     
     
 
