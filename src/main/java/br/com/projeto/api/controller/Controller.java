@@ -118,16 +118,8 @@ public class Controller {
     public void clientes (@Valid @RequestBody Cliente obj){
     }
     
-
     
-    
-    
-    
-    
-    
-
-
-    //-----------------Teste API------------//
+    //-----------------Teste de Rotas da API------------//
 
     @GetMapping("")
     public String mensagem() {
