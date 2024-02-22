@@ -41,8 +41,8 @@ public class Controller {
     }
 
     @GetMapping("/api/{codigo}")
-    public Pessoa selecionarPeloCodigo (@PathVariable int codigo) {//SELECT * FROM PESSOA WHERE CODIGO = 1 POR EXEMPLO
-        return injetaDependencia.findByCodigo(codigo);
+    public ResponseEntity<?> selecionarPeloCodigo (@PathVariable int codigo) {//SELECT * FROM PESSOA WHERE CODIGO = 1 POR EXEMPLO
+        return servico.selecionarPeloCodigo(codigo);
     }
     @PutMapping("/api")
     public Pessoa editar(@RequestBody Pessoa obj){
@@ -52,9 +52,9 @@ public class Controller {
 
     @DeleteMapping ("/api/{codigo}")
     public void removerDado (@PathVariable int codigo){
-        Pessoa obj = selecionarPeloCodigo (codigo);
+        //Pessoa obj = selecionarPeloCodigo (codigo);
 
-        injetaDependencia.delete(obj);
+       // injetaDependencia.delete(obj);
     }
 
     @GetMapping("/api/contador")

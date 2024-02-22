@@ -50,12 +50,12 @@ public class Servico {
 
     //Metodo para selecionar pessoas pelo codigo
 
-   /* public ResponseEntity<?> selecionarPeloCodigo (int codigo){
+    public ResponseEntity<?> selecionarPeloCodigo (int codigo){
         if (injetaDependencia.countByCodigo(codigo) == 0){
             mensagem.setMensagem("Não foi encontrada nenhuma pessoa com esses parâmetros");
             return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
         }else{
-            return new ResponseEntity<>(injetaDependencia.findByCodigo(codigo),HttpStatus.Ok);
+            return new ResponseEntity<>(injetaDependencia.findByCodigo(codigo),HttpStatus.OK);
         }
-    }*/
+    }
 }
