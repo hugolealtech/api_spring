@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.projeto.api.models.Pessoa;
 import br.com.projeto.api.repositorio.Repositorio;
+import br.com.projeto.api.servico.Servico;
 import io.micrometer.common.lang.NonNull;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,12 +22,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 public class Controller {
 
+
+
    @Autowired
    private Repositorio injetaDependencia;
+
+   @Autowired
+   private Servico servico;
     
    @PostMapping ("/api") 
-   public Pessoa cadastrar(@RequestBody Pessoa obj){
-        return injetaDependencia.save(obj);
+   public ResponseEntity<?> cadastrar(@RequestBody Pessoa obj){
+        return servico.cadastrar(obj);
     }
 
     @GetMapping ("/api")
