@@ -51,7 +51,8 @@ public class Controller {
     }
 
     @DeleteMapping ("/api/{codigo}")
-    public void removerDado (@PathVariable int codigo){
+    public ResponseEntity remover (@PathVariable int codigo){
+        return servico.remover(codigo);
         //Pessoa obj = selecionarPeloCodigo (codigo);
 
        // injetaDependencia.delete(obj);
