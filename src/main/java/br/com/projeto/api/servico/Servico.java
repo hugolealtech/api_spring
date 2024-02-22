@@ -1,5 +1,8 @@
 package br.com.projeto.api.servico;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,4 +61,52 @@ public class Servico {
             return new ResponseEntity<>(injetaDependencia.findByCodigo(codigo),HttpStatus.OK);
         }
     }
-}
+
+    //Metodo para editar dados
+
+    public ResponseEntity <?> editar (Pessoa obj){
+
+        if(injetaDependencia.countByCodigo(obj.getCodigo()) == 0){
+            mensagem.setMensagem("O código informado não existe");
+            return new ResponseEntity<> (mensagem, HttpStatus.NOT_FOUND);
+        
+        
+            }else if (obj.getNome().equals("")){
+                mensagem.setMensagem("É necessário informar um nome");
+                return new ResponseEntity<>(mensagem,HttpStatus.BAD_REQUEST);
+
+            }else if(obj.getIdade() < 0 ||  obj.getIdade() > 130){
+                mensagem.setMensagem("Por favor, forneça idade válida");
+                return new ResponseEntity<> (mensagem,HttpStatus.BAD_REQUEST);
+
+            }else if(obj.getSobrenome().equals("")){
+                mensagem.setMensagem("Por favor insira seu sobrenome");
+                return new ResponseEntity<> (mensagem,HttpStatus.BAD_REQUEST);
+
+            }else if(obj.getCpf().isEmpty()){
+                mensagem.setMensagem("Por favor, fornecer seu CPF");
+                return new ResponseEntity<>(mensagem,HttpStatus.BAD_REQUEST);
+
+            } else if (obj.getNumTelefone().isEmpty()) {
+                mensagem.setMensagem("Por favor, fornecer seu telefone");
+                return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
+            } else if (obj.getDataNascimento().isEmpty() || !isValidDate(obj.getDataNascimento())) {
+                mensagem.setMensagem("Por favor, forneça uma data de nascimento válida no formato yyyy-MM-dd");
+                return new ResponseEntity<>(mensagem, HttpStatus.BAD_REQUEST);
+            } else {
+                // Lógica de salvamento se todas as validações passarem
+                injetaDependencia.save(obj);
+                return new ResponseEntity<>(obj, HttpStatus.CREATED);
+            }  
+        }
+    }    
+       /*  private boolean isValidDate(String dataNascimento) {
+            try {
+                // Tenta converter a string para LocalDate usando um DateTimeFormatter
+                LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                return true; // Se a conversão for bem-sucedida, a data é válida
+            } catch (Exception e) {
+                return false; // Se houver exceção, a data é inválida
+            }
+        }
+    }*/

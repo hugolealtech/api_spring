@@ -45,9 +45,9 @@ public class Controller {
         return servico.selecionarPeloCodigo(codigo);
     }
     @PutMapping("/api")
-    public Pessoa editar(@RequestBody Pessoa obj){
+    public ResponseEntity <?> editar(@RequestBody Pessoa obj){
     
-        return injetaDependencia.save(obj);
+        return servico.editar(obj);
     }
 
     @DeleteMapping ("/api/{codigo}")
