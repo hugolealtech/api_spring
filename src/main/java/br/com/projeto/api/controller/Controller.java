@@ -91,10 +91,17 @@ public class Controller {
     public List <Pessoa> idadeMaiorIgual() {
         return injetaDependencia.idadeMaiorIgual(18);
     }
+    /*@GetMapping("/statusAtual")
+    public String statusAtual() {
+        return "Configurando Status";//Mapping só para testes   
+    }*/
+    
 
     @GetMapping("/status")
-    public ResponseEntity <?> status () {
+    public ResponseEntity <String> status () {
+
         return new ResponseEntity<>(HttpStatus.CREATED);
+
     }
     
 
