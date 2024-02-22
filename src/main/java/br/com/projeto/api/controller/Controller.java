@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.projeto.api.models.Cliente;
 import br.com.projeto.api.models.Pessoa;
 import br.com.projeto.api.repositorio.Repositorio;
 import br.com.projeto.api.servico.Servico;
 import io.micrometer.common.lang.NonNull;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -109,6 +112,10 @@ public class Controller {
 
         return new ResponseEntity<>(HttpStatus.CREATED);
 
+    }
+
+    @PostMapping ("/cliente")
+    public void clientes (@Valid @RequestBody Cliente obj){
     }
     
 
